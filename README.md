@@ -1,6 +1,4 @@
 # Enterprise-Active-Directory-Infrastructure-and-Group-Policy-Management
-The lab is built using VMware Workstation 17 Pro and consists of a Windows Server 2022 domain controller and multiple Windows client machines.
+This project demonstrates the design and deployment of a centralized Windows enterprise environment using Windows Server 2022 and Active Directory Domain Services (AD DS). The lab simulates the IT infrastructure of a small organization, where users, computers, security groups, and security policies are centrally managed from a Windows Server domain controller.
 
-The environment will be configured to represent a small business network, with users and computers organized into appropriate Organizational Units (OUs) and managed through Active Directory, security groups, and Group Policy Objects (GPOs).
-
-The project also demonstrates remote administration using Remote Server Administration Tools (RSAT) from a domain-joined Windows client.
+The project focuses on practical system administration, identity management, endpoint management, and Group Policy administration, providing hands-on experience with technologies commonly used in enterprise Windows environments.
