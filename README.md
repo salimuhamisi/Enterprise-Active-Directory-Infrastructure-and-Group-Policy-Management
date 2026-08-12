@@ -35,3 +35,52 @@ The main objective is to build a functional and manageable Windows domain enviro
 ---
 ### Step 1: Setting up Windows Server 2022
 Open the VMware workstation and click "Create a New Virtual Machine"
+![](images/server/Installation/Capture1.PNG)
+
+Select "Typical (recommended)" and click Next
+![](images/server/Installation/Capture2.PNG)
+
+ Select "I will install operating system later option, to avoid troubles of other options"
+![](images/server/Installation/Capture3.PNG)
+
+Next, select "Windows server" as guest operating system, and Window server 2022 version. Select Next
+![](images/server/Installation/Capture4.PNG)
+
+Then give your virtual machine a name, or leave the default "Windows server 2022". You van also browse a different location for the machine installation if you wish, then click Next.
+![](images/server/Installation/Capture5.PNG)
+
+Next, specify disk capacity. the recommended disk size is 60.0GB, but in this lab I will go with minimum, 20GB, because we're not going to install many applications. Select "split virtual disk into into multiple disk" and click Next
+![](images/server/Installation/Capture6.PNG)
+
+Review the virtual machine specifications, and click 'Finish', to create the virtual machine
+![](images/server/Installation/Capture7.PNG)
+
+Up to this stage, you have your window server 2022 virtual machine template created, and the remaining step is to select the ISO image, boot it and install the operating system. But before that, we can review and adjust configurations based on your system’s capabilities, to improve performance of our virtual machine.
+You may increase CPU, RAM, and storage allocations if your machine has sufficient resources to ensure better performance. Alternatively, you can leave them at the minimum or recommended system requirements. One of the key advantages of using virtualization tools is flexibility, which means we can easily modify CPU, RAM, and storage allocations even after creating the virtual machines.
+
+From the CD/DVD (SATA) tab under Connection, click on "Use ISO image file" then Browse. Select the Windows Server 2022 (ISO) that was downloaded. From the Network Adapter tab, uncheck "Connect at power on" option. This prevents Windows from attempting to download updates during installation, which will speed up the installation. Of course, updates are essential for security, but since this is a home lab environment, Windows can update itself later when we turn on the Network. Click on "Close" then "Finish".
+![](images/server/Installation/Capture8.PNG)
+
+![](images/server/Installation/Capture9.PNG)
+
+![](images/server/Installation/Capture10.PNG)
+
+![](images/server/Installation/Capture11.PNG)
+
+![](images/server/Installation/Capture12.PNG)
+
+![](images/server/Installation/Capture13.PNG)
+
+![](images/server/Installation/Capture14.PNG)
+
+![](images/server/Installation/Capture15.PNG)
+
+![](images/server/Installation/Capture16.PNG)
+
+![](images/server/Installation/Capture17.PNG)
+
+![](images/server/Installation/Capture18.PNG)
+
+![](images/server/Installation/Capture19.PNG)
+
+![](images/server/Installation/Capture20.PNG)
