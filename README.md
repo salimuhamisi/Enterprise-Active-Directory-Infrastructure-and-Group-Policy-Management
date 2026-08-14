@@ -234,13 +234,71 @@ Click **Member Of** tab, then **Add** button.
 ![](images/server/users%20%26%20groups/Capture12.PNG)
 
 Type the group you wish to add user into, and select **Check names**.
-For Peter ICT user, I will search 'ict', for James HR > hr ... The group will appear in the box, the select **Add**, and the user will be added into the group.
+For Peter ICT user, I will search 'ict', for James HR > hr ... The group will appear in the box, the select **Add**, and the user will be added into the group. Be sure to repeat the process to add all other users into respective groups.
 - **Note:** For ICT users to be able to work with active directory and make changes, such as enabling or disabling other accounts, reset passwords etc, add them to **Domain Admins** group, created by default.
 ![](images/server/users%20%26%20groups/Capture13.PNG)
 ![](images/server/users%20%26%20groups/Capture14.PNG)
 
 **And with that, our server side configurations are complete. We're going to create at least 2 client machines to test these functionalities.**
 
+
+### Step 4: Setting up Windows 10 (Client)
+Like we set up Windows Server 2022 previously, click on **Create a New Virtual Machine** on the VMware Workstation Pro 17 Dashboard. Proceed with the wizard: **Typical** > **I will install the operating system later** > Guest operating system: **Microsoft Windows**; Version: **Windows 10 x64** > Virtual machine name: **Windows 10 x64** (Default) > Maximum disk size: **20 GB & "Split virtual disk into multiple files** > Before clicking on **Finish** click on **Customize Hardware**.
+
+You can increase the Memory to "4 GB (4096 MB)" from the Memory tab and also you can increase the number of cores per processor to 2 from the Processors tab. From the CD/DVD (SATA) tab under Connection, click on "Use ISO image file" then Browse. Select the Windows Server 10 (ISO) that was downloaded.
+![](images/client/installation/Capture6.PNG)
+
+Once the environment is created, you will see that another tab, "Windows 10 x64", was created next to our server "Windows Server 2022". As before, click on "Power on this Virtual Machine" to begin the Operating System (OS) installation. Quickly press "any key" when prompted to boot from the CD/ISO.
+![](images/client/installation/Capture6.1.PNG)
+![](images/client/installation/Capture6.2.PNG)
+
+Select "Language, Time and currency format, Keyboard" then click Next. Click on "Install Now". Click on "I don't have a product key"
+![](images/client/installation/Capture7.PNG)
+![](images/client/installation/Capture8.PNG)
+
+Only the Pro, Education, and Enterprise editions of Windows 10/11 can be joined to a domain. The Active Directory domain is not supported in Home Editions; thus, make sure to select the Pro version. Next.
+![](images/client/installation/Capture9.PNG)
+
+Accept the Software License Agreement and click Next. Click on "Custom: Install Windows only (advanced)" as we are installing Windows for the first time. Once the installation finishes, it will ask for our region. Select your region and click next.
+![](images/client/installation/Capture19.PNG)
+
+Create password for **Administrator** account
+![](images/client/installation/Capture20.PNG)
+
+Complete setting up Security questions
+![](images/client/installation/Capture21.PNG)
+
+Continue with limited setup. Finally You will be on your desktop.
+![](images/client/installation/Capture25.PNG)
+
+
+### Step 5: Client Configurations
+Now that we have our new client, lets rename this machine for easier identification. By default, Windows assigns randomly generated names (such as DESKTOP-UOJ92P) to newly installed machines, which can make identification and management difficult. For this reason, it is important to rename each computer using a consistent and meaningful naming convention, such as DC01, CLIENT01, etc. For this lab, we will rename this Windows 10 machine to "COMP01".
+Right-click on Start > System.
+![](images/client/configuration/Capture0.PNG)
+
+The About page will open. Then click on "Rename this PC".
+![](images/client/configuration/Capture1.PNG)
+
+Type "COMP01" > Next. The computer should restart itself.
+![](images/client/configuration/Capture2.PNG)
+
+To connect "helpdesk" to the DC, we need to know the DC's network details and reconfigure "COMP01" network settings. Remember we noted our domain controller's IP address during previous steps. If you can't remember, go inside our DC01 CMD and type **ipconfig*, or the easiest way is to ping DC01 from client machine CMD, i.e ping **DC01**, and we shall get our server's IP address.
+After getting DCs IP address, Lets open **Network & Internet** in client (COMP01) machine, > **Ethernet** > **Change adapter options**
+![](images/client/configuration/Capture4.PNG)
+
+Right click the Network Adapter you are connected to, then **Properties**
+![](images/client/configuration/Capture5.PNG)
+
+Scroll down to find and double click **Internet Protocol Version 4 (TCP/IPv4)**
+![](images/client/configuration/Capture6.PNG)
+
+Here, select **Use the following DNS server addresses**, and add the IP address of our domain controller, **DC01** in the **Preferred DNS server**, and at **Alternate DNS server**, put google DNS server, for internet traffic. (8.8.8.8). Click OK and close the wizards.
+![](images/client/configuration/Capture7.PNG)
+
+
+![](images/client/configuration/Capture2.PNG)
+![](images/client/configuration/Capture2.PNG)
 
 
 
