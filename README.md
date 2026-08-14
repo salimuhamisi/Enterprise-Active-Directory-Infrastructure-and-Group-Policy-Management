@@ -43,13 +43,13 @@ Select "Typical (recommended)" and click Next
  Select "I will install operating system later option, to avoid troubles of other options"
 ![](images/server/Installation/Capture3.PNG)
 
-Next, select "Windows server" as guest operating system, and Window server 2022 version. Select Next
+Next, select "Microsoft Windows" as guest operating system, and Window server 2022 version. Select Next
 ![](images/server/Installation/Capture4.PNG)
 
-Then give your virtual machine a name, or leave the default "Windows server 2022". You van also browse a different location for the machine installation if you wish, then click Next.
+Then give your virtual machine a name, or leave the default "Windows server 2022". You can also browse a different location for the machine installation if you wish, then click Next.
 ![](images/server/Installation/Capture5.PNG)
 
-Next, specify disk capacity. the recommended disk size is 60.0GB, but in this lab I will go with minimum, 20GB, because we're not going to install many applications. Select "split virtual disk into into multiple disk" and click Next
+Next, specify disk capacity. The recommended maximum disk size is 60.0GB, but in this lab I will go with minimum, 20.0GB, because we're not going to install many applications. Select "split virtual disk into into multiple disk" and click Next
 ![](images/server/Installation/Capture6.PNG)
 
 Review the virtual machine specifications, and click 'Finish', to create the virtual machine
@@ -87,5 +87,106 @@ Accept the Software License Agreement and click Next. Click on "Custom: Install 
 
 Now, it is ready! We have to press Ctrl+Alt+Del to enter our password for the Administrator Account. However, pressing Ctrl+Alt+Del as usual does not work in a virtual environment. To progress, click VM on the menu bar, then "Send Ctrl+Alt+Del".
 ![](images/server/Installation/Capture18.PNG)
-![](images/server/Installation/Capture19.PNG)
-![](images/server/Installation/Capture20.PNG)
+![](images/server/Installation/Capture21.PNG)
+![](images/server/configuration/Capture0.PNG)
+
+### Step 2: Changing the Computer's Name
+To make our work easy while working with installed window server 2022, we're going to rename our server to DC01, but it's optional.
+Right click on the **window start menu** > **system** > **Rename this PC** > give the name **DC01**, Then "Next". You may be required to restart your machine for the changes to take place, just restart.
+![](images/server/Installation/Capture2020.PNG)
+
+### Step 3: Install Active Directory and Promote DC01 to Domain controller
+Now that Windows Server 2022 is installed and the server has been renamed to DC01, the next step is to install **Active Directory Domain Services (AD DS)**. AD DS provides the centralized identity and resource management capabilities required for our Windows domain environment.
+Open **Server Manager**. From Server Manager's menu bar, click on **Manage**, then **Add Roles and Features** to begin installing the required server role.
+![](images/server/configuration/Capture2.PNG)
+
+"Add Roles and Features Wizard" will start. Click Next to begin.
+![](images/server/configuration/Capture3.PNG)
+
+Select Role-based or feature-based installation, then click Next.
+![](images/server/configuration/Capture4.PNG)
+
+Select DC01 as the destination server and click Next.
+![](images/server/configuration/Capture5.PNG)
+
+From the available server roles, select Active Directory Domain Services (AD DS). When prompted, click Add Features to include the required management tools and dependencies.
+![](images/server/configuration/Capture6.PNG)
+
+Review the selected role and features, then click Next.
+![](images/server/configuration/Capture7.PNG)
+
+If "Group Policy Management" is unchecked, check it, then click Next.
+![](images/server/configuration/Capture8.PNG)
+
+Click Next
+![](images/server/configuration/Capture9.PNG)
+
+Click the check box "Restart the destination server automatically if required" and "Install" to begin.
+![](images/server/configuration/Capture10.PNG)
+
+Once the installation is completed, before closing the wizard, click on "Promote this server to a domain controller".
+If accidentally closed the wizard, select Promote this server to a domain controller from the Server Manager notification flag to begin configuring the domain.
+![](images/server/configuration/Capture12.PNG)
+
+Under Deployment Configuration, select Add a new forest because this is the first Domain Controller in our lab environment. Enter the desired domain name, such as RoundTech.local, and click Next.
+![](images/server/configuration/Capture13.PNG)
+
+Configure the Domain Controller Options, including the forest and domain functional levels. Ensure Domain Name System (DNS) server and Global Catalog (GC) are selected, then create a secure Directory Services Restore Mode (DSRM) password.
+![](images/server/configuration/Capture14.PNG)
+
+Review the DNS configuration. A warning may appear because DNS delegation is not being configured in this isolated home lab. This can be safely acknowledged before continuing.
+![](images/server/configuration/Capture15.PNG)
+
+Review or configure the default NetBIOS domain name, then click Next.
+![](images/server/configuration/Capture16.PNG)
+
+Review the default paths for the Active Directory database, log files, and SYSVOL. For this lab, the default locations are sufficient.
+![](images/server/configuration/Capture17.PNG)
+
+Review the configuration summary to ensure the domain and Domain Controller settings are correct. Click Next to proceed.
+![](images/server/configuration/Capture18.PNG)
+
+The Prerequisites Check will verify that DC01 meets the requirements for Domain Controller promotion. Once the checks complete successfully, click Install.
+![](images/server/configuration/Capture19.PNG)
+
+The promotion process will begin. DC01 will install and configure Active Directory, DNS, the Global Catalog, and other required domain services. The server will automatically restart when the process is complete.
+![](images/server/configuration/Capture20.PNG)
+
+After successfully promoting DC01 to a Domain Controller, the server restarts to complete the configuration. Once it boots back up, the login screen will display the newly created domain context, confirming that DC01 is now part of the new Active Directory domain.
+![](images/server/configuration/Capture21.PNG)
+
+Now, one final step step to take to ensure our server is perfectly working, is to give it a static IP address, and the DNS address to point to itself, to avoid future troubles.
+First, open the server CMD, and type **ipconfig*, then press enter. Note the IPV4 address (192.168.xx.xx), we'll set it as static.
+
+![](images/server/configuration/Capture23.PNG)
+
+To set a static IP to our server, Right click the Network icon in the tool bar, click **Open Network and Internet Settings** > **Ethernet** tab, **Change adapter options** > Right click the Network adapter you're connected with, then **Properties**. See below screenshots.
+![](images/server/configuration/Capture24.PNG)
+![](images/server/configuration/Capture25.PNG)
+![](images/server/configuration/Capture26.PNG)
+
+Double click "Internet Protocol Version 4 (TCP/IPV4)"
+![](images/server/configuration/Capture27.PNG)
+
+Here, select the option "Use the following IP address". In IP address, add the server IP address we've just noted in the previous step in the server CMD. Subnet mask will autofill, and also leave alone default gateway.
+Proceed below and select "use the following DNS server addresses". For preferred DNS server, add loop back address that points to its IP address (127.0.0.1), and DNS server for Google (8.8.8.8), then click "OK" to save changes
+![](images/server/configuration/Capture28.PNG)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
