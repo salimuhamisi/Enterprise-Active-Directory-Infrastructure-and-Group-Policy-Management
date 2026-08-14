@@ -297,8 +297,19 @@ Here, select **Use the following DNS server addresses**, and add the IP address 
 ![](images/client/configuration/Capture7.PNG)
 
 
-![](images/client/configuration/Capture2.PNG)
-![](images/client/configuration/Capture2.PNG)
+### Step 6: Connecting Windows 10 to the Domain Controller
+To connect "COMP01" to the DC, Navigate to **start menu** > **System** > **Advanced System Settings**
+![](images/client/configuration/Capture8.PNG)
+![](images/client/configuration/Capture9.PNG)
+
+In the wizard, under **Computer Name**, click **Change button**
+![](images/client/configuration/Capture10.PNG)
+
+Select **Domain** instead of work group, and type our domain, which is **RoundTech.local**. Incase you forgot your domain, open active directory users and computers like below, and take note of domain name.
+![](images/client/configuration/Capture11.PNG)
+![](images/client/configuration/Capture12.PNG)
+![](images/client/configuration/Capture13.PNG)
+
 
 
 
