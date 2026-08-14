@@ -172,6 +172,75 @@ Here, select the option "Use the following IP address". In IP address, add the s
 Proceed below and select "use the following DNS server addresses". For preferred DNS server, add loop back address that points to its IP address (127.0.0.1), and DNS server for Google (8.8.8.8), then click "OK" to save changes
 ![](images/server/configuration/Capture28.PNG)
 
+### Step 4: Creating Organizational Units, Users, and Groups
+To establish a structured Active Directory environment, the organization is divided into three branches: **Nairobi, Mombasa, and Kisumu**. Each branch is organized into separate **Users, Computers, and Servers OUs** to simplify administration and management.
+
+User accounts are created within their respective branch Users OU, while security groups are created to organize users according to their roles or access requirements. The appropriate users are then assigned to these groups, providing a structured approach to **role-based access control and centralized user management**.
+To start with, click on window search tool, search and open "Active directory users and computers".
+![](images/server/users%20%26%20groups/Capture0.PNG)
+![](images/server/users%20%26%20groups/Capture1.PNG)
+
+To create OUs (Nairobi, Mombasa, Kisumu), right click on the domain name **RoundTech.local** > **New** > **Organizational Unit**
+![](images/server/users%20%26%20groups/Capture2.PNG)
+
+Give the OU Name, e.g Nairobi, and click OK.
+![](images/server/users%20%26%20groups/Capture3.PNG)
+Repeat the process to create Mombasa and Kisumu OUs, within the RoundTech.local domain.
+
+Note that it is possible to create OUs inside another OU. In this regard, lets create **Users, Computers and Servers** OUs inside Nairobi, Mombasa and Kisumu OUs.
+![](images/server/users%20%26%20groups/Capture41.PNG)
+![](images/server/users%20%26%20groups/Capture42.PNG)
+![](images/server/users%20%26%20groups/Capture43.PNG)
+
+At end You should have below structure of folders.
+![](images/server/users%20%26%20groups/Capture44.PNG)
+
+We'll go ahead and create groups, but before that lets learn some concepts we'll encounter while creating groups, **Group Scope & Group Type**
+- **Group** Scope: Determines where the group can be used and who can be a member.
+    1. **Domain Local**: Mainly used to assign permissions to resources such as folders, files, printers, and shares within a domain. It can contain members from other domains.
+    2. **Global**: Used to group users with similar roles or responsibilities within the same domain, such as **GG-Finance* or **GG-IT-Admins*.
+    3. **Universal**: Used when groups need to contain members from or be used across multiple domains within the same forest.
+  
+- **Group Type**: Determines what the group is used for.
+    1. **Security Group**: Used for access control and permissions, such as granting users access to folders, files, applications, or printers.
+    2. **Distribution Group**: Used mainly for email distribution and cannot normally be used to assign Windows security permissions.
+With that introduction, lets create 4 groups inside; **HR, Sales, Accounting and ICT**, All are security groups with global scope.
+Right click **Users** OU inside Mombasa OU, **New** > **Group**. Group name: **HR**, Group scope: **Global**, and Group type: **Security**
+![](images/server/users%20%26%20groups/Capture5.PNG)
+Repeat the process to create the remaining 3 groups (ICT, Sales and Accounting), in each OU (Nairobi and Kisumu)
+
+Next, We're going to create users. Users in the AD should have first and last names filled, plus their "User logon name", which is usually combination of first name initial and second name, but that can change according to company policy.
+For easier future reference, I have adopted a naming convention, where user's second name is the department he/she belongs, see below.
+Right click users (inside Mombasa OU) > **New** > **User**.
+Proceed to add first name, last name, and user logon name. Full name will autofill.
+Example: First name: peter, Last name: ICT, User logon name: peterict (or whichever name you want), then click Next.
+![](images/server/users%20%26%20groups/Capture6.PNG)
+
+Set first time logon password for user, and make sure to check **user must change password at next logon**. Click Next
+![](images/server/users%20%26%20groups/Capture7.PNG)
+
+Then Finish
+![](images/server/users%20%26%20groups/Capture8.PNG)
+
+Repeat this process, to create at least 2 people for groups (though we've not added them to groups.), e.g Paul ICT, Alex Sales, James HR, etc.
+![](images/server/users%20%26%20groups/Capture9.PNG)
+
+Now, With those user accounts added in the domain, They can logon and start operating computers that are joined in the domain. We can test that, but before testing, let ensure we add all our users to their respective groups.
+To add **user into a group**, right click the user then **Properties**, a user profile card will pop up, and you can modify information about users.
+![](images/server/users%20%26%20groups/Capture10.PNG)
+![](images/server/users%20%26%20groups/Capture11.PNG)
+
+Click **Member Of** tab, then **Add** button.
+![](images/server/users%20%26%20groups/Capture12.PNG)
+
+Type the group you wish to add user into, and select **Check names**.
+For Peter ICT user, I will search 'ict', for James HR > hr ... The group will appear in the box, the select **Add**, and the user will be added into the group.
+- **Note:** For ICT users to be able to work with active directory and make changes, such as enabling or disabling other accounts, reset passwords etc, add them to **Domain Admins** group, created by default.
+![](images/server/users%20%26%20groups/Capture13.PNG)
+![](images/server/users%20%26%20groups/Capture14.PNG)
+
+**And with that, our server side configurations are complete. We're going to create at least 2 client machines to test these functionalities.**
+
 
 
 
