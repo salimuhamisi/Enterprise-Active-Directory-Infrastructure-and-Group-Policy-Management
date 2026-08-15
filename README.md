@@ -308,7 +308,42 @@ In the wizard, under **Computer Name**, click **Change button**
 Select **Domain** instead of work group, and type our domain, which is **RoundTech.local**. Incase you forgot your domain, open active directory users and computers like below, and take note of domain name.
 ![](images/client/configuration/Capture11.PNG)
 ![](images/client/configuration/Capture12.PNG)
-![](images/client/configuration/Capture13.PNG)
+
+You will be prompted to enter AD Administrator passwords to join the client machine to domain, proceed then click **OK** to restart the computer.
+![](images/client/configuration/Capture15.PNG)
+
+Our client machine is now added to the domain (You can confirm **COMP01** is available in active directory **Computers**), and we initially created several accounts and groups in AD, e.g **Peter ICT, Alex sales, James HR**, lets try to logon into client machine with these accounts. We'll first try Peter ICT (Logon name: peterict)
+Select other, to sign in with domain.
+![](images/client/users/Capture0.PNG)
+
+Peter ICT will be required to reset password, the moment he attempt to login. This is because remember when we checked **User must change password in the next logon**, while setting users password.
+![](images/client/users/Capture1.PNG)
+
+Change password and press Enter
+![](images/client/users/Capture2.PNG)
+
+Press okay, and you will be logged in.
+![](images/client/users/Capture3.PNG)
+![](images/client/users/Capture4.PNG)
+![](images/client/users/Capture6.PNG)
+
+### Step 7: Installing Remote Server Administration Tools
+Remote Server Administration Tools **(RSAT)** enable IT administrators to remotely manage Windows Server roles and features directly from a Windows 10 or 11 workstation. With RSAT installed, administrative tasks such as managing **Active Directory users and groups, Group Policy, and other server roles can be performed without needing direct access to the server**. This reflects real-world IT support practices, where administrators manage infrastructure from their own machines rather than logging into servers interactively.
+
+To install RSAT, right click on window **start menu** > **Apps and Features** > **Optional Features** and click **Plus** icon.
+![](images/client/users/Capture7.PNG)
+![](images/client/users/Capture8.PNG)
+
+Search **RSAT**, select **RSAT active directory and light weight directory services tools**, and click **Install**. It will install in background.
+![](images/client/users/Capture11.PNG)
+![](images/client/users/Capture12.PNG)
+
+After around 2 minutes, search **Active**, you'll see **active directory windows and computers*. Click to open.
+![](images/client/users/Capture13.PNG)
+
+From here, you can see you have exact snapshot of active directory, where as an IT Support specialist, you can reset password, create and modify accounts and groups, etc., but you must be logged in with account that is domain Admin, Peter ICT, Paul ICT or Agnes ICT.
+![](images/client/users/Capture14.PNG)
+![](images/client/users/Capture15.PNG)
 
 
 
